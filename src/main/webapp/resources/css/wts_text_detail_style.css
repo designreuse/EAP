@@ -1,0 +1,192 @@
+
+.title_name
+{
+	padding:10px 0 10px 5px;
+	font-size:125%;color:#505050;
+	line-height:1.25em;
+	margin-left:0;
+	margin-right:0;
+	width:100%
+}
+.main_window a
+{
+	color:#1570a6
+	
+}
+.main_window a:hover
+{
+	color:#d52d00
+	
+}
+.title_name_little
+{
+	color:#1570a6
+}
+
+.faceplate
+{
+	
+	margin-top:0;
+	padding-bottom:25px;
+	padding-left:10px;
+	padding-right:0;
+	margin-left:1%;
+	margin-bottom:10px;
+	list-style-type:disc;	
+
+}
+.embed
+{
+	margin-top:15px;
+	margin-bottom:10px;
+	word-break:break-all;
+}
+
+.second-embed
+{
+	
+	margin-top:18px;
+	margin-bottom:10px;
+	word-break:break-all;
+	padding:0 0 15px 25px;
+	color: #006c00;
+	vertical-align:baseline;
+}
+.third-embed
+{
+	
+	margin-top:18px;
+	margin-bottom:10px;
+	word-break:break-all;
+	padding:0 0 15px 50px;
+	color: #804040;
+	vertical-align:baseline;
+}
+.second-embed-unit
+{
+	padding:0 0 0 5px;
+	color: #006c00;
+	vertical-align:baseline;
+}
+.third-embed-unit
+{
+	padding:0 0 0 5px;
+	vertical-align:baseline;
+	color: #804040;
+}
+.line
+{
+	border-bottom:1px solid #aeaeae
+}
+.dotted-line
+{
+	height:1px;
+	border:none;
+	border-top:1px dashed #c0c0c0;										
+}
+.dotted-line-nocolor
+{
+	height:5px;
+	border:none;
+	border-top:0px dashed #c0c0c0;										
+}
+.contacts
+{
+	display:none;
+}
+.contacts_less
+{
+	display:none;
+}
+.preparation_ref
+{
+	display:none;
+}
+.preparation_ref_less
+{
+	display:none;
+}
+
+.second_level_text
+{
+	margin-top:0;
+	padding-bottom:25px;
+	padding-left:35px;
+	line-height:1.25em;
+	display:none;
+	vertical-align:baseline;
+}
+.second_level_text_show
+{
+	margin-top:0;
+	padding-bottom:25px;
+	padding-left:35px;
+	line-height:1.25em;
+	vertical-align:baseline;
+}
+.second_level_input
+{
+	margin-top:0;
+	padding-bottom:25px;
+	padding-left:35px;
+	line-height:1.25em;
+}
+.second_leve_menu
+{
+	height:40px;
+	width:100%;
+	line-height:40px;  
+	transition:all 0.2s linear;
+	-webkit-transition:all 0.2s linear;
+    -moz-transition: all 0.2s linear;
+    -o-transition: all 0.2s linear;
+}
+.second_leve_menu:hover
+{
+	background-color:#bfbfbf;
+	transition:all 0.2s linear;
+	-webkit-transition:all 0.2s linear;
+    -moz-transition: all 0.2s linear;
+    -o-transition: all 0.2s linear;
+}
+.physiological_data-select
+{
+	border: 1px solid #525252;
+	border-radius: 5px;
+	text-align:center;
+	color: #ffffff;
+	padding:5px 3px 5px 3px;
+	background: #525252;
+	line-height:1.25em;
+	transition:all 0.2s linear;
+	-webkit-transition:all 0.2s linear;
+    -moz-transition: all 0.2s linear;
+    -o-transition: all 0.2s linear;
+}
+
+.physiological_data-select:hover
+{
+	border: 1px solid #808080;
+	color: #000000;
+	background: #ffffff;
+	cursor:pointer;
+	transition:all 0.2s linear;
+	-webkit-transition:all 0.2s linear;
+    -moz-transition: all 0.2s linear;
+    -o-transition: all 0.2s linear;
+}
+
+.physiological_data
+{
+	display:none;
+}
+.f-deepblue {
+    color: #006C00;
+}
+figure img {
+    border-radius: 5px;
+    overflow: hidden;
+}
+.announcement_note img {
+    width:90%;
+}

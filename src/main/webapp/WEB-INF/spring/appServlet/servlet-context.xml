@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+
+	<!-- DispatcherServlet Context: defines this servlet's request-processing 
+		infrastructure -->
+
+	<!-- Enables the Spring MVC @Controller programming model -->
+	<annotation-driven />
+
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving 
+		up static resources in the ${webappRoot}/resources directory -->
+	<resources mapping="/resources/**" location="/resources/" />
+
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
+		in the /WEB-INF/views directory -->
+	<beans:bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".jsp" />
+	</beans:bean>
+
+	 <beans:bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close"> 
+	       <beans:property name="driverClass" value="com.mysql.jdbc.Driver"/> 
+	       <beans:property name="jdbcUrl" value="jdbc:mysql://127.0.0.1:3306/mcaep?useUnicode=true&amp;characterEncoding=utf8" /> 
+	       <beans:property name="user" value="root" /> 
+	       <beans:property name="password" value="wts11150519" /> 
+	       <beans:property name="minPoolSize" value="5" /> 
+	       <beans:property name="maxPoolSize" value="30" /> 
+	       <beans:property name="initialPoolSize" value="10"/> 
+	       <beans:property name="maxIdleTime" value="60"/> 
+	       <beans:property name="acquireIncrement" value="5" /> 
+	       <beans:property name="maxStatements" value="0" /> 
+	       <beans:property name="idleConnectionTestPeriod" value="60" /> 
+	       <beans:property name="acquireRetryAttempts" value="30" /> 
+	       <beans:property name="breakAfterAcquireFailure" value="true" /> 
+	</beans:bean> 
+	
+<!-- 返回json 方法二 需要导入 jackson-annotations.jar,jackson-core.jar,jackson-databind.jar-->  
+   <beans:bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" />
+    <beans:bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter" >
+        <beans:property name="messageConverters">
+            <beans:list>
+                <beans:bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                    <beans:property name="supportedMediaTypes">
+                        <beans:list>
+                            <beans:value>text/html; charset=UTF-8</beans:value>
+                            <beans:value>application/json;charset=UTF-8</beans:value>
+                        </beans:list>
+                    </beans:property>
+                </beans:bean>
+                <beans:bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                    <beans:property name="supportedMediaTypes">
+                        <beans:list>
+                            <beans:value>text/html; charset=UTF-8</beans:value>
+                            <beans:value>application/json;charset=UTF-8</beans:value>
+                        </beans:list>
+                    </beans:property>
+                </beans:bean>
+            </beans:list>
+        </beans:property>
+    </beans:bean>
+	
+	
+	
+	<!-- SpringMVC上传文件时，需要配置MultipartResolver处理器 -->  
+    <beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">  
+        <beans:property name="defaultEncoding" value="UTF-8"/>  
+        <!-- 指定所上传文件的总大小不能超过200KB。注意maxUploadSize属性的限制不是针对单个文件，而是所有文件的容量之和 -->  
+        <beans:property name="maxUploadSize" value="100000000"/>  
+    </beans:bean> 
+       
+    <!-- SpringMVC在超出上传文件限制时，会抛出org.springframework.web.multipart.MaxUploadSizeExceededException -->  
+    <!-- 该异常是SpringMVC在检查上传的文件信息时抛出来的，而且此时还没有进入到Controller方法中 -->  
+    <beans:bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">  
+        <beans:property name="exceptionMappings">  
+            <beans:props>  
+                <!-- 遇到MaxUploadSizeExceededException异常时，自动跳转到/WEB-INF/jsp/error_fileupload.jsp页面 -->  
+                <beans:prop key="org.springframework.web.multipart.MaxUploadSizeExceededException">error_fileupload</beans:prop>  
+            </beans:props>  
+        </beans:property>  
+    </beans:bean>  
+	<!-- Hibernate 4 SessionFactory Bean definition -->
+	<beans:bean id="hibernate4AnnotatedSessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<beans:property name="dataSource" ref="dataSource" />
+		<beans:property name="annotatedClasses">
+			<beans:list>
+				<beans:value>com.journaldev.spring.model.User</beans:value>
+				<beans:value>com.journaldev.spring.model.Organization</beans:value>
+				<beans:value>com.journaldev.spring.model.Person</beans:value>
+				<beans:value>com.journaldev.spring.model.Files</beans:value>
+				<beans:value>com.journaldev.spring.model.Equipment</beans:value>
+				<beans:value>com.journaldev.spring.model.Technology</beans:value>
+				<beans:value>com.journaldev.spring.model.Experiment</beans:value>
+				<beans:value>com.journaldev.spring.model.Achievement</beans:value>
+				<beans:value>com.journaldev.spring.model.Announcement</beans:value>
+				<beans:value>com.journaldev.spring.model.Species</beans:value>
+				<beans:value>com.journaldev.spring.model.Strain</beans:value>
+				<beans:value>com.journaldev.spring.model.Experimental_animal</beans:value>
+				<beans:value>com.journaldev.spring.model.Characteristic_animal</beans:value>
+				<beans:value>com.journaldev.spring.model.Genetic_data</beans:value>
+				<beans:value>com.journaldev.spring.model.Physiological_data</beans:value>
+				<beans:value>com.journaldev.spring.model.Biochemical_data</beans:value>
+				<beans:value>com.journaldev.spring.model.Autopsy_data</beans:value>
+				<beans:value>com.journaldev.spring.model.Collection</beans:value>
+				<beans:value>com.journaldev.spring.model.Message</beans:value>
+				<beans:value>com.journaldev.spring.model.Authority</beans:value>
+				<beans:value>com.journaldev.spring.model.Role_power</beans:value>
+				<beans:value>com.journaldev.spring.model.Role</beans:value>
+				<beans:value>com.journaldev.spring.model.Power</beans:value>
+			</beans:list>
+		</beans:property>
+		<beans:property name="hibernateProperties">
+			<beans:props>
+				<beans:prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect
+				</beans:prop>
+				<beans:prop key="hibernate.show_sql">true</beans:prop>
+				<beans:prop key="hibernate.temp.use_jdbc_metadata_defaults">false</beans:prop>
+				<beans:prop key="connection.useUnicode">true</beans:prop> 
+	        	<beans:prop key="connection.characterEncoding">utf8</beans:prop> 
+			</beans:props>
+		</beans:property>
+	</beans:bean>
+	
+	<beans:bean id="userDAO" class="com.journaldev.spring.dao.UserDAOImpl">
+		<beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+	</beans:bean>
+	<beans:bean id="userService" class="com.journaldev.spring.service.UserServiceImpl">
+		<beans:property name="userDAO" ref="userDAO"></beans:property>
+	</beans:bean>
+	
+	<beans:bean id="organizationDAO" class="com.journaldev.spring.dao.OrganizationDAOImpl">
+		<beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+	</beans:bean>
+	<beans:bean id="organizationService" class="com.journaldev.spring.service.OrganizationServiceImpl">
+		<beans:property name="organizationDAO" ref="organizationDAO"></beans:property>
+	</beans:bean>
+	
+	<beans:bean id="personDAO" class="com.journaldev.spring.dao.PersonDAOImpl">
+		<beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+	</beans:bean>
+	<beans:bean id="personService" class="com.journaldev.spring.service.PersonServiceImpl">
+		<beans:property name="personDAO" ref="personDAO"></beans:property>
+	</beans:bean>
+	
+	<beans:bean id="fileDAO" class="com.journaldev.spring.dao.FileDAOImpl">
+		<beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+	</beans:bean>
+	<beans:bean id="fileService" class="com.journaldev.spring.service.FileServiceImpl">
+		<beans:property name="fileDAO" ref="fileDAO"></beans:property>
+	</beans:bean>
+	
+	<beans:bean id="equipmentDAO" class="com.journaldev.spring.dao.EquipmentDAOImpl">
+		<beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+	</beans:bean>
+	<beans:bean id="equipmentService" class="com.journaldev.spring.service.EquipmentServiceImpl">
+		<beans:property name="equipmentDAO" ref="equipmentDAO"></beans:property>
+	</beans:bean>
+	
+	<beans:bean id="technologyDAO" class="com.journaldev.spring.dao.TechnologyDAOImpl">
+		<beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+	</beans:bean>
+	<beans:bean id="technologyService" class="com.journaldev.spring.service.TechnologyServiceImpl">
+		<beans:property name="technologyDAO" ref="technologyDAO"></beans:property>
+	</beans:bean>
+	
+	<beans:bean id="experimentDAO" class="com.journaldev.spring.dao.ExperimentDAOImpl">
+		<beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+	</beans:bean>
+	<beans:bean id="experimentService" class="com.journaldev.spring.service.ExperimentServiceImpl">
+		<beans:property name="experimentDAO" ref="experimentDAO"></beans:property>
+	</beans:bean>
+	
+	<beans:bean id="achievementDAO" class="com.journaldev.spring.dao.AchievementDAOImpl">
+		<beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+	</beans:bean>
+	<beans:bean id="achievementService" class="com.journaldev.spring.service.AchievementServiceImpl">
+		<beans:property name="achievementDAO" ref="achievementDAO"></beans:property>
+	</beans:bean>
+	
+	<beans:bean id="announcementDAO" class="com.journaldev.spring.dao.AnnouncementDAOImpl">
+		<beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+	</beans:bean>
+	<beans:bean id="announcementService" class="com.journaldev.spring.service.AnnouncementServiceImpl">
+		<beans:property name="announcementDAO" ref="announcementDAO"></beans:property>
+	</beans:bean>
+	
+	<beans:bean id="speciesDAO" class="com.journaldev.spring.dao.SpeciesDAOImpl">
+		<beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+	</beans:bean>
+	<beans:bean id="speciesService" class="com.journaldev.spring.service.SpeciesServiceImpl">
+		<beans:property name="speciesDAO" ref="speciesDAO"></beans:property>
+	</beans:bean>
+	
+	<beans:bean id="strainDAO" class="com.journaldev.spring.dao.StrainDAOImpl">
+		<beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+	</beans:bean>
+	<beans:bean id="strainService" class="com.journaldev.spring.service.StrainServiceImpl">
+		<beans:property name="strainDAO" ref="strainDAO"></beans:property>
+	</beans:bean>
+	
+	<beans:bean id="experimental_animalDAO" class="com.journaldev.spring.dao.Experimental_animalDAOImpl">
+		<beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+	</beans:bean>
+	<beans:bean id="experimental_animalService" class="com.journaldev.spring.service.Experimental_animalServiceImpl">
+		<beans:property name="experimental_animalDAO" ref="experimental_animalDAO"></beans:property>
+	</beans:bean>
+	
+	<beans:bean id="characteristic_animalDAO" class="com.journaldev.spring.dao.Characteristic_animalDAOImpl">
+		<beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+	</beans:bean>
+	<beans:bean id="characteristic_animalService" class="com.journaldev.spring.service.Characteristic_animalServiceImpl">
+		<beans:property name="characteristic_animalDAO" ref="characteristic_animalDAO"></beans:property>
+	</beans:bean>
+	
+	<beans:bean id="genetic_dataDAO" class="com.journaldev.spring.dao.Genetic_dataDAOImpl">
+		<beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+	</beans:bean>
+	<beans:bean id="genetic_dataService" class="com.journaldev.spring.service.Genetic_dataServiceImpl">
+		<beans:property name="genetic_dataDAO" ref="genetic_dataDAO"></beans:property>
+	</beans:bean>
+	
+	<beans:bean id="physiological_dataDAO" class="com.journaldev.spring.dao.Physiological_dataDAOImpl">
+		<beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+	</beans:bean>
+	<beans:bean id="physiological_dataService" class="com.journaldev.spring.service.Physiological_dataServiceImpl">
+		<beans:property name="physiological_dataDAO" ref="physiological_dataDAO"></beans:property>
+	</beans:bean>
+	
+	<beans:bean id="biochemical_dataDAO" class="com.journaldev.spring.dao.Biochemical_dataDAOImpl">
+		<beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+	</beans:bean>
+	<beans:bean id="biochemical_dataService" class="com.journaldev.spring.service.Biochemical_dataServiceImpl">
+		<beans:property name="biochemical_dataDAO" ref="biochemical_dataDAO"></beans:property>
+	</beans:bean>
+	
+	<beans:bean id="autopsy_dataDAO" class="com.journaldev.spring.dao.Autopsy_dataDAOImpl">
+		<beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+	</beans:bean>
+	<beans:bean id="autopsy_dataService" class="com.journaldev.spring.service.Autopsy_dataServiceImpl">
+		<beans:property name="autopsy_dataDAO" ref="autopsy_dataDAO"></beans:property>
+	</beans:bean>
+	
+	<beans:bean id="collectionDAO" class="com.journaldev.spring.dao.CollectionDAOImpl">
+		<beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+	</beans:bean>
+	<beans:bean id="collectionService" class="com.journaldev.spring.service.CollectionServiceImpl">
+		<beans:property name="collectionDAO" ref="collectionDAO"></beans:property>
+	</beans:bean>
+	
+	<beans:bean id="messageDAO" class="com.journaldev.spring.dao.MessageDAOImpl">
+		<beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+	</beans:bean>
+	<beans:bean id="messageService" class="com.journaldev.spring.service.MessageServiceImpl">
+		<beans:property name="messageDAO" ref="messageDAO"></beans:property>
+	</beans:bean>
+	
+	<beans:bean id="authorityDAO" class="com.journaldev.spring.dao.AuthorityDAOImpl">
+		<beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+	</beans:bean>
+	<beans:bean id="authorityService" class="com.journaldev.spring.service.AuthorityServiceImpl">
+		<beans:property name="authorityDAO" ref="authorityDAO"></beans:property>
+	</beans:bean>
+	
+	<beans:bean id="roleDAO" class="com.journaldev.spring.dao.RoleDAOImpl">
+		<beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+	</beans:bean>
+	<beans:bean id="roleService" class="com.journaldev.spring.service.RoleServiceImpl">
+		<beans:property name="roleDAO" ref="roleDAO"></beans:property>
+	</beans:bean>
+	
+	<beans:bean id="powerDAO" class="com.journaldev.spring.dao.PowerDAOImpl">
+		<beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+	</beans:bean>
+	<beans:bean id="powerService" class="com.journaldev.spring.service.PowerServiceImpl">
+		<beans:property name="powerDAO" ref="powerDAO"></beans:property>
+	</beans:bean>
+	
+	<context:component-scan base-package="com.journaldev.spring" />
+	
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+	
+	<beans:bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+	</beans:bean>
+
+
+</beans:beans>

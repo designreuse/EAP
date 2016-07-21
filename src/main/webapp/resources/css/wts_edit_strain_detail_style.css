@@ -1,0 +1,34 @@
+
+.dotted-line
+{
+	height:1px;
+	border:none;
+	border-top:1px dashed #c0c0c0;										
+}
+.dotted-line-nocolor
+{
+	height:5px;
+	border:none;
+	border-top:0px dashed #c0c0c0;										
+}
+
+.second-embed
+{
+	
+	margin-top:18px;
+	margin-bottom:10px;
+	word-break:break-all;
+	padding:0 0 15px 25px;
+	color: #006c00;
+	vertical-align:baseline;
+}
+.third-embed
+{
+	
+	margin-top:18px;
+	margin-bottom:10px;
+	word-break:break-all;
+	padding:0 0 15px 25px;
+	color: #804040;
+	vertical-align:baseline;
+}

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+   <head>
+      <meta charset="UTF-8" />
+      <title>A date range picker for Bootstrap</title>
+      <link rel="stylesheet" href="../../bootstrap/css/bootstrap.css">
+      <link rel="stylesheet" type="text/css" media="all" href="daterangepicker.css" />
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+   </head>
+   <body style="margin: 60px 0">
+
+
+
+
+
+          <div class="demo">
+            <h4>Your Date Range Picker</h4>
+            <input type="text" id="demo" class="form-control">
+            <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+          </div>
+
+
+
+
+
+
+          <script type="text/javascript" src="../jQuery/jQuery-2.1.4.min.js"></script>
+          <script type="text/javascript" src="../../bootstrap/js/bootstrap.js"></script>
+          <script type="text/javascript" src="moment.js"></script>
+          <script type="text/javascript" src="daterangepicker.js"></script>
+
+      <style type="text/css">
+      .demo { position: relative; }
+      .demo i {
+        position: absolute; bottom: 10px; right: 24px; top: auto; cursor: pointer;
+      }
+      </style>
+
+      <script type="text/javascript">
+      $(document).ready(function() {
+         $('#config-text').keyup(function() {
+           eval($(this).val());
+         });
+         $('.configurator input, .configurator select').change(function() {
+           updateConfig();
+         });
+          $('.demo i').click(function() {
+            $(this).parent().find('input').click();
+          });
+          $('#startDate').daterangepicker({
+            singleDatePicker: true,
+            startDate: moment().subtract(6, 'days')
+          });
+          $('#endDate').daterangepicker({
+            singleDatePicker: true,
+            startDate: moment()
+          });
+        updateConfig();
+        function updateConfig() {
+              $('#demo').daterangepicker({
+                "timePicker": true,
+                "ranges": {
+                    "Today": [
+                        "2015-12-10T08:07:15.256Z",
+                        "2015-12-10T08:07:15.256Z"
+                    ],
+                    "Yesterday": [
+                        "2015-12-09T08:07:15.256Z",
+                        "2015-12-09T08:07:15.256Z"
+                    ],
+                    "Last 7 Days": [
+                        "2015-12-04T08:07:15.256Z",
+                        "2015-12-10T08:07:15.256Z"
+                    ],
+                    "Last 30 Days": [
+                        "2015-11-11T08:07:15.256Z",
+                        "2015-12-10T08:07:15.256Z"
+                    ],
+                    "This Month": [
+                        "2015-11-30T16:00:00.000Z",
+                        "2015-12-31T15:59:59.999Z"
+                    ],
+                    "Last Month": [
+                        "2015-10-31T16:00:00.000Z",
+                        "2015-11-30T15:59:59.999Z"
+                    ]
+                },
+                "startDate": "07/01/2015",
+                "endDate": "07/15/2015"
+                }, function(start, end, label) {
+                  console.log("New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')");
+                });
+            }
+          });
+      </script>
+
+   </body>
+</html>

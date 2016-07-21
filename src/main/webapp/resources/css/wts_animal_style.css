@@ -1,0 +1,35 @@
+
+/*	-------这个是隐藏3D画面容器的------- */
+#chart1 {
+	display: none;
+}
+/*	-------这个是展示3D画面容器的------- */
+@media (min-width: 550px) {
+	#chart1 {
+	display: block;
+	}
+}
+/*	-------这个是动物表格的样式------- */
+.table-color-animal
+{
+  
+  background-color: #fff;
+  transition:all 0.1s linear;
+}
+.table-color-animal tbody tr:hover
+{  
+  background-color: #808080;
+  transition:all 0.1s linear;
+}
+/*	-------这个是点击动物文字样式的------- */
+.herf_font_animal_name,
+.herf_font_animal_name a
+{
+	color:#004080;
+	transition:all 0.2s linear;
+}
+.herf_font_animal_name a:hover
+{
+	color:#fa0c0c;
+	transition:all 0.2s linear;
+}

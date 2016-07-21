@@ -1,0 +1,84 @@
+/*	-------这个是控制3D画面容器的------- */
+.threedframe {
+	position: relative;
+	padding: 65px 0px 0 15px;
+	rgba(255, 255, 255, 0.1);
+}	
+/*	-------这个是隐藏3D画面容器的------- */
+.display_image {
+	display: none;
+}	
+/*	-------这个是隐藏上部导航的------- */
+.display_menu {
+	display: none;
+}
+/*	-------这个是展示3D画面容器的------- */
+@media (min-width: 767px) {
+	.threedframe {
+	background: #000033;
+	}	
+	.display_image {
+	display: block;
+	}
+}
+/*	-------这个是展示上部导航的------- */
+@media (min-width: 1150px) {
+	.display_menu {
+	display: block;
+	}
+}
+/*	-------这个是左边带条带的文本框颜色的------- */
+.callout.callout-gray {
+  border-color: #333;
+  background-color: #f0f0f4 !important;  
+}
+.callout.callout-gray a {
+  color: #3399CC;
+}
+.callout.callout-gray a:hover {
+  color: #FF3333;
+}
+/*	-------这个是主页上实验动物与特色动物点击文字样式的------- */
+.herf_font_animal,
+.herf_font_animal a
+{
+	color:#000066;
+	transition:all 0.2s linear;
+}
+.herf_font_animal:hover,
+.herf_font_animal a:hover
+{
+	color:#0099FF;
+	font-size:125%;
+	transition:all 0.2s linear;
+}
+/*	-------这个是主页上收缩框的颜色------- */
+.frame-mini
+{
+  background-color: #d2d6de !important;
+}
+/*	-------这个是主页表格的样式------- */
+.table-color-cas
+{
+  
+  background-color: #f0f0f4 !important;
+  transition:all 0.1s linear;
+}
+.table-color-cas tbody tr:hover
+{  
+  background-color: #808080;
+  transition:all 0.1s linear;
+}
+/*	-------这个是主页上公告点击文字样式的------- */
+.herf_font_announcement,
+.herf_font_announcement a
+{
+	color:#333;
+	transition:all 0.1s linear;
+}
+.herf_font_announcement:hover,
+.herf_font_announcement a:hover
+{
+	color:#ffffff;
+	transition:all 0.1s linear;
+}
